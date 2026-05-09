@@ -1,0 +1,49 @@
+@Krabby.Api_HostAddress = http://localhost:5206
+
+### AniDB AID test
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/19204
+Accept: application/json
+
+###
+
+### AniDB AID test puniru
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/18315
+Accept: application/json
+
+###
+
+###  Isekai wa Smartphone to Tomo ni. 2
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/19204
+Accept: application/json
+
+###
+
+### AniDB Episode AID test
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/loaded
+Accept: application/json
+
+###
+
+### AniDB Episode AID test
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/episodes/get
+Accept: application/json
+
+###
+
+### AniDB Episode AID test
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/episodes/status/de9f1a29-8507-4a57-999d-a2c02b9194b8
+Accept: application/json
+
+###
+
+### AniDB login status test
+GET {{Krabby.Api_HostAddress}}/api/anidb/login/status
+Accept: application/json
+
+###
+
+### AniDB login test
+GET {{Krabby.Api_HostAddress}}/api/anidb/login/execute
+Accept: application/json
+
+###

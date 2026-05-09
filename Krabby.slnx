@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Krabby.Api/Krabby.Api.csproj" />
+  <Project Path="Krabby.Core/Krabby.Core.csproj" />
+  <Project Path="Krabby.Persistence/Krabby.Persistence.csproj" />
+</Solution>
