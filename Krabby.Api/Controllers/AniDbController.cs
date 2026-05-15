@@ -119,7 +119,5 @@ namespace Krabby.Api.Controllers
                 data = result
             });
         }
-    }
-
-    
+    }   
 }

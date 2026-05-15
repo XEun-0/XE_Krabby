@@ -8,6 +8,8 @@ using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Krabby.Core.Common;
+
 using static System.Collections.Specialized.BitVector32;
 
 namespace Krabby.Core.Services.AniDB;
@@ -16,12 +18,13 @@ public class AniDbService
 {
     private readonly AniDbAuth _settings;
 
-    private const string NOT_LOGGED_IN_ERROR = "Not Logged in.";
-    private const string ALREADY_LOGGED_IN_ERROR = "Already logged in.";
-    private const string SESSION_KEY_EXPIRED = "Session key has expired, login again.";
-    private const string TIMEOUT_ERROR = "TIMEOUT";
+    // private const string NOT_LOGGED_IN_ERROR = "Not Logged in.";
+    // private const string ALREADY_LOGGED_IN_ERROR = "Already logged in.";
+    // private const string SESSION_KEY_EXPIRED = "Session key has expired, login again.";
+    // private const string TIMEOUT_ERROR = "TIMEOUT";
     private const string ANIME_CURRENTLY_LOADED = "Anime is already loaded";
     private const string ANIME_NOT_LOADED = "Anime is not loaded";
+
     private int episodeCounter = 1;
     private int episodeMax = 12;
     private bool animeLoaded = false;
@@ -143,7 +146,7 @@ public class AniDbService
 
         return new
         {
-            error = ALREADY_LOGGED_IN_ERROR
+            error = AppCommon.ALREADY_LOGGED_IN_ERROR
         };
     }
 
@@ -162,7 +165,7 @@ public class AniDbService
                                                  $"ANIME s={currentSessionKey}&aid={aid}");
 
                     // New anime loaded
-                    if (!animeRaw.Equals(TIMEOUT_ERROR))
+                    if (!animeRaw.Equals(AppCommon.TIMEOUT_ERROR))
                     {
                         animeLoaded = true;
                     }
@@ -201,14 +204,14 @@ public class AniDbService
                 _loginStatus = false;
                 return new
                 {
-                    error = SESSION_KEY_EXPIRED
+                    error = AppCommon.SESSION_KEY_EXPIRED
                 };
             }
         }
 
         return new
         {
-            error = NOT_LOGGED_IN_ERROR
+            error = AppCommon.NOT_LOGGED_IN_ERROR
         };
     }
     
@@ -480,7 +483,7 @@ public class AniDbService
         var completed = await Task.WhenAny(receiveTask, timeoutTask);
 
         if (completed == timeoutTask)
-            return TIMEOUT_ERROR;
+            return AppCommon.TIMEOUT_ERROR;
 
         var response = receiveTask.Result;
 

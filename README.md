@@ -9,6 +9,12 @@ docker run --name krabby-db \
 ```
 
 ```
+dotnet user-secrets set "AniDb:User" "user"
+```
+```
+dotnet user-secrets set 'AniDb:Password' 'password'
+```
+```
 docker run -d \
   --name krabby-postgres \
   -e POSTGRES_USER=postgres \
@@ -115,6 +121,80 @@ krabby=#
       },
       {
         "eid": 182228,
+        "episodeNumber": "12",
+        "type": "Regular"
+      }
+    ]
+  }
+}
+```
+
+```
+{
+  "status": "done",
+  "data": {
+    "animeName": "Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken",
+    "airDateYear": "2026",
+    "session_key": "YCQxM",
+    "aid": 19699,
+    "episodeData": [
+      {
+        "eid": 310062,
+        "episodeNumber": "01",
+        "type": "Regular"
+      },
+      {
+        "eid": 310063,
+        "episodeNumber": "02",
+        "type": "Regular"
+      },
+      {
+        "eid": 310064,
+        "episodeNumber": "03",
+        "type": "Regular"
+      },
+      {
+        "eid": 310313,
+        "episodeNumber": "04",
+        "type": "Regular"
+      },
+      {
+        "eid": 310585,
+        "episodeNumber": "05",
+        "type": "Regular"
+      },
+      {
+        "eid": 310586,
+        "episodeNumber": "06",
+        "type": "Regular"
+      },
+      {
+        "eid": 310587,
+        "episodeNumber": "07",
+        "type": "Regular"
+      },
+      {
+        "eid": 310588,
+        "episodeNumber": "08",
+        "type": "Regular"
+      },
+      {
+        "eid": 310846,
+        "episodeNumber": "09",
+        "type": "Regular"
+      },
+      {
+        "eid": 310847,
+        "episodeNumber": "10",
+        "type": "Regular"
+      },
+      {
+        "eid": 310848,
+        "episodeNumber": "11",
+        "type": "Regular"
+      },
+      {
+        "eid": 310849,
         "episodeNumber": "12",
         "type": "Regular"
       }
