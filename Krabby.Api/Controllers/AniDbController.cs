@@ -119,5 +119,17 @@ namespace Krabby.Api.Controllers
                 data = result
             });
         }
+
+        // GET /api/anidb/alive
+        [HttpGet("alive")]
+        public async Task<IActionResult> GetAlive()
+        {
+            // var result = await _service.GetAnimeLoadedAsync();
+
+            return Ok(new
+            {
+                success = true,
+            });
+        }
     }   
 }

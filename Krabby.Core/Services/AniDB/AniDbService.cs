@@ -18,10 +18,6 @@ public class AniDbService
 {
     private readonly AniDbAuth _settings;
 
-    // private const string NOT_LOGGED_IN_ERROR = "Not Logged in.";
-    // private const string ALREADY_LOGGED_IN_ERROR = "Already logged in.";
-    // private const string SESSION_KEY_EXPIRED = "Session key has expired, login again.";
-    // private const string TIMEOUT_ERROR = "TIMEOUT";
     private const string ANIME_CURRENTLY_LOADED = "Anime is already loaded";
     private const string ANIME_NOT_LOADED = "Anime is not loaded";
 
@@ -241,9 +237,10 @@ public class AniDbService
         {
             if (!episodesDataGathering)
             {
-                episodesDataGathering = true; //episodeCounter
+                episodesDataGathering = true; // episodeCounter
 
                 Console.WriteLine($"episodeMax = {episodeMax}");
+
                 for (int i = 1; i <= episodeMax; i++)
                 {
                     episodeCounter = i;
@@ -328,12 +325,14 @@ public class AniDbService
 
             animeNameRomaji = parts[12];
             airDateYear = ParseYear(parts[10]);
+            episodeMax = int.Parse(parts[1]); // 
 
             result.Add(new
             {
                 nameRomaji = AnimeNameInRomaji,
                 startingDate = StartingDate,
-                date = parts[10],
+                numEpisodes = episodeMax,
+                dateYears = parts[10],
                 aid = parts[0],
                 animeRaw = response
             });
@@ -342,7 +341,7 @@ public class AniDbService
         return result;
     }
 
-    private string EpisodePrefixTypeMap(string typeIn)
+    private static string EpisodePrefixTypeMap(string typeIn)
     {
         string result;
 
