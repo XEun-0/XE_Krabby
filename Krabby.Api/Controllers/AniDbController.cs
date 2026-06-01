@@ -11,15 +11,24 @@ namespace Krabby.Api.Controllers
         private readonly AniDbService _service;
         private readonly AniDbJobStore _jobStore;
 
+        /// <summary>
+        /// Constructor for AniDbController
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="jobStore"></param>
         public AniDbController(AniDbService service, AniDbJobStore jobStore)
         {
             _service = service;
             _jobStore = jobStore;
         }
 
+        /// <summary>
+        /// API hook for getting anime by aid from AniDB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET /api/anidb/aid/18751
         [HttpGet("aid/{id}")]
-        [RequestTimeout(600)] // 10 minutes
         public async Task<IActionResult> GetByAid(int id)
         {
             var result = await _service.GetAnimeDataAsync(id);
@@ -31,6 +40,10 @@ namespace Krabby.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // GET /api/anidb/login/status
         [HttpGet("login/status")]
         public async Task<IActionResult> GetLoginStatus()
@@ -44,6 +57,10 @@ namespace Krabby.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // GET /api/anidb/login/execute
         [HttpGet("login/execute")]
         public async Task<IActionResult> ExecuteLogin()
@@ -57,6 +74,10 @@ namespace Krabby.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // GET /api/anidb/aid/episodes/get
         [HttpGet("aid/episodes/get")]
         public async Task<IActionResult> GetEpisodeData()
@@ -73,12 +94,12 @@ namespace Krabby.Api.Controllers
 
                     Console.WriteLine("[JOB] Completed");
 
-                    _jobStore.SetResult(jobId, result);
+                    _jobStore.SetResult(result);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("[JOB ERROR] " + ex);
-                    _jobStore.SetResult(jobId, new { error = ex.Message });
+                    _jobStore.SetResult(new { error = ex.Message });
                 }
             });
 
@@ -89,13 +110,18 @@ namespace Krabby.Api.Controllers
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
         // GET /api/anidb/aid/loaded
         [HttpGet("aid/episodes/status/{jobid}")]
         public async Task<IActionResult> GetEpisodesDataStatus(string jobId)
         {
             //var result = await _service.GetEpisodesDataStatusAsync();
 
-            var result = _jobStore.GetResult(jobId);
+            var result = _jobStore.GetResult();
 
             if (result == null)
                 return Ok(new { status = "processing" });
@@ -106,20 +132,28 @@ namespace Krabby.Api.Controllers
                 data = result
             });
         }
-        
-        // GET /api/anidb/aid/loaded
-        [HttpGet("aid/loaded")]
-        public async Task<IActionResult> GetAnimeLoaded()
-        {
-            var result = await _service.GetAnimeLoadedAsync();
 
-            return Ok(new
-            {
-                success = true,
-                data = result
-            });
-        }
+        // /// <summary>
+        // /// 
+        // /// </summary>
+        // /// <returns></returns>
+        // // GET /api/anidb/aid/loaded
+        // [HttpGet("aid/loaded")]
+        // public async Task<IActionResult> GetAnimeLoaded()
+        // {
+        //     var result = await _service.GetAnimeLoadedAsync();
 
+        //     return Ok(new
+        //     {
+        //         success = true,
+        //         data = result
+        //     });
+        // }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // GET /api/anidb/alive
         [HttpGet("alive")]
         public async Task<IActionResult> GetAlive()
@@ -129,6 +163,23 @@ namespace Krabby.Api.Controllers
             return Ok(new
             {
                 success = true,
+            });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        // GET /api/anidb/alive
+        [HttpGet("aid/clear")]
+        public async Task<IActionResult> ClearAnime()
+        {
+            var result = await _service.ClearAnime();
+
+            return Ok(new
+            {
+                success = true,
+                data = result
             });
         }
     }   

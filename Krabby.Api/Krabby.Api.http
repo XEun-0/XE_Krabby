@@ -1,16 +1,22 @@
 @Krabby.Api_HostAddress = http://localhost:5206
 
 ###  Anime lookup
-GET {{Krabby.Api_HostAddress}}/api/anidb/aid/19042
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/8321
 Accept: application/json
 
 ###
 
-### AniDB Episode AID test
-GET {{Krabby.Api_HostAddress}}/api/anidb/aid/loaded
+###  Anime lookup
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/clear
 Accept: application/json
 
 ###
+
+# ### AniDB Episode AID test
+# GET {{Krabby.Api_HostAddress}}/api/anidb/aid/loaded
+# Accept: application/json
+
+# ###
 
 ### AniDB Episode AID test
 GET {{Krabby.Api_HostAddress}}/api/anidb/aid/episodes/get
@@ -19,7 +25,7 @@ Accept: application/json
 ###
 
 ### AniDB Episode AID test
-GET {{Krabby.Api_HostAddress}}/api/anidb/aid/episodes/status/e8568f9a-257d-4f47-b4f1-7ac4e9994dc1
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/episodes/status/0
 Accept: application/json
 
 ###

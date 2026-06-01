@@ -1,31 +1,89 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Krabby.Core.Services.AniDB
-{
+{   
+    /// <summary>
+    /// 
+    /// </summary>
     public class AniDbJobStore
     {
-        private readonly Dictionary<string, object?> _jobs = new();
+        private string? _currentJobId;
+        private object? _currentResult;
 
+        /// <summary>
+        /// Creates a new active job and clears
+        /// any previous result.
+        /// </summary>
+        /// <returns>
+        /// Newly created job ID.
+        /// </returns>
         public string CreateJob()
         {
-            var id = Guid.NewGuid().ToString();
-            Console.WriteLine("[AniDbJobStore: CreateJob] Created Job " + id);
-            _jobs[id] = null;
-            
-            return id;
+            _currentJobId = Guid.NewGuid().ToString();
+            _currentResult = null;
+
+            Console.WriteLine(
+                "[AniDbJobStore: CreateJob] Created Job "
+                + _currentJobId);
+
+            return _currentJobId;
         }
 
-        public void SetResult(string id, object result)
+        /// <summary>
+        /// Stores the result for the current job.
+        /// </summary>
+        /// <param name="result">
+        /// Result object to store.
+        /// </param>
+        public void SetResult(object result)
         {
+            if (_currentJobId == null)
+            {
+                throw new InvalidOperationException(
+                    "No active job exists.");
+            }
+
             Console.WriteLine("[AniDbJobStore: SetResult] Set Job result");
-            _jobs[id] = result;
+
+            _currentResult = result;
         }
 
-        public object? GetResult(string id)
+        /// <summary>
+        /// Gets the current job result.
+        /// </summary>
+        /// <returns>
+        /// Current stored result or null.
+        /// </returns>
+        public object? GetResult()
         {
-            return _jobs.TryGetValue(id, out var result) ? result : null;
+            return _currentResult;
+        }
+
+        /// <summary>
+        /// Gets the active job ID.
+        /// </summary>
+        public string? GetCurrentJobId()
+        {
+            return _currentJobId;
+        }
+
+        /// <summary>
+        /// Clears the current job state.
+        /// </summary>
+        public void Clear()
+        {
+            _currentJobId = null;
+            _currentResult = null;
+
+            Console.WriteLine("[AniDbJobStore: Clear] Cleared Job");
+        }
+
+        /// <summary>
+        /// Returns whether a job is active.
+        /// </summary>
+        public bool HasActiveJob()
+        {
+            return _currentJobId != null;
         }
     }
 }

@@ -10,9 +10,15 @@ public class AniDbRateLimiter
 
     private DateTime _lastCall = DateTime.MinValue;
 
-    // 🔥 safer delay
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly TimeSpan _minDelay = TimeSpan.FromSeconds(4);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task WaitAsync()
     {
         await _lock.WaitAsync();
