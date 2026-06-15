@@ -12,7 +12,7 @@ namespace Krabby.Api.Controllers
         private readonly AniDbJobStore _jobStore;
 
         /// <summary>
-        /// Constructor for AniDbController
+        ///     Constructor for AniDbController
         /// </summary>
         /// <param name="service"></param>
         /// <param name="jobStore"></param>
@@ -23,7 +23,7 @@ namespace Krabby.Api.Controllers
         }
 
         /// <summary>
-        /// API hook for getting anime by aid from AniDB
+        ///     API hook for getting anime by aid from AniDB
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

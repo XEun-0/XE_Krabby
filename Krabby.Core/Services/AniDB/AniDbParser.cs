@@ -49,11 +49,45 @@ public class AniDbParser
                 Aid = _localAid,
                 EpisodeCount = int.Parse(parts[1]),
                 AnimeAirDate = ParseYear(parts[10]),
-                Title = parts[12]
+                Title = parts[12],
+                ShortTitle = GetBestShortTitle(parts[16]),
             };
         }
 
         throw new Exception("Unable to parse anime");
+    }
+    
+    private static bool IsMostlyAscii(string s)
+    {
+        return s.Count(c => c < 128) > (s.Length * 0.8);
+    }
+
+    private static string GetBestShortTitle(string field)
+    {
+        var candidates = new List<string>();
+
+        foreach (var title in field.Split('\'', StringSplitOptions.RemoveEmptyEntries))
+        {
+            foreach (var piece in title.Split(','))
+            {
+                string cleaned = piece.Trim();
+
+                if (string.IsNullOrWhiteSpace(cleaned))
+                    continue;
+
+                if (cleaned.All(c => c == '?'))
+                    continue;
+
+                candidates.Add(cleaned);
+            }
+        }
+
+        return candidates
+            .Where(IsMostlyAscii)
+            .OrderBy(x => x.Length)
+            .FirstOrDefault()
+            ?? candidates.FirstOrDefault()
+            ?? "";
     }
 
     /// <summary>

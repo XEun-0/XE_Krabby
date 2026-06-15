@@ -9,6 +9,8 @@ public class Anime
 
     public string Title { get; set; } = string.Empty;
 
+    public string ShortTitle { get; set; } = string.Empty;
+
     public int EpisodeCount { get; set; }
 
     public string AnimeAirDate { get; set; } = string.Empty;

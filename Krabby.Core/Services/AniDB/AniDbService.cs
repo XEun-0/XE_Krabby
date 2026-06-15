@@ -22,7 +22,7 @@ public sealed class AniDbService
         _endpoint ?? throw new InvalidOperationException("Endpoint not initialized");
 
     private string SessionKey =>
-        _state.SessionKey ?? throw new InvalidOperationException("Session not initialized");
+        _session.SessionKey ?? throw new InvalidOperationException("Session not initialized");
 
     /// <summary>
     /// Constructor for AniDbService
@@ -60,6 +60,9 @@ public sealed class AniDbService
             _session.HasKeyExpired()
                 ? LoginState.Expired
                 : LoginState.LoggedOut;
+
+        Console.WriteLine($"Session._sessionKey = {_session.SessionKey}");
+        Console.WriteLine($"State.SessionKey   = {_state.SessionKey}");
     }
 
     /// <summary>
@@ -94,9 +97,15 @@ public sealed class AniDbService
     /// <returns></returns>
     public async Task<object> ExecuteLoginAsync()
     {
+        // Run a refresh to reload or check login state
+        _state.LoginState = _session.GetSessionState();
+
         if (_state.LoginState == LoginState.LoggedIn)
         {
-            return new { error = "Already logged in" };
+            return new
+            {
+                error = AppCommon.ALREADY_LOGGED_IN_ERROR
+            };
         }
 
         _state.LoginState = LoginState.LoggingIn;
@@ -107,7 +116,7 @@ public sealed class AniDbService
         {
             _state.LoginState = LoginState.LoggedOut;
 
-            return new { error = "LOGIN FAILED" };
+            return new { error = AppCommon.LOGIN_FAILED };
         }
 
         await _session.SetSession(sessionKey);
@@ -168,8 +177,7 @@ public sealed class AniDbService
 
             _state.JobState = AnimeJobState.LoadingAnime;
 
-            string raw =
-                await _transport.SendAsync(
+            string raw = await _transport.SendAsync(
                     Endpoint,
                     $"ANIME s={SessionKey}&aid={aid}");
 
@@ -204,6 +212,7 @@ public sealed class AniDbService
 
             return new {
                 nameRomaji = anime.Title,
+                nameShort = anime.ShortTitle,
                 startingDate = anime.AnimeAirDate,
                 numEpisodes = anime.EpisodeCount,
                 // dateYears = anime.,

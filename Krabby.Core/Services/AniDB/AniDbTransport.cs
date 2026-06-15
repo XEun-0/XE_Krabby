@@ -15,7 +15,7 @@ public class AniDbTransport
     private readonly AniDbRateLimiter _rateLimiter;
 
     /// <summary>
-    /// 
+    /// Constructor for AniDbTransport class
     /// </summary>
     /// <param name="rateLimiter"></param>
     public AniDbTransport(AniDbRateLimiter rateLimiter)

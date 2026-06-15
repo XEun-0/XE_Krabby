@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace Krabby.Core.Services.AniDB;
 
+/// <summary>
+/// 
+/// </summary>
 public class AniDbRateLimiter
 {
     private readonly SemaphoreSlim _lock = new(1, 1);

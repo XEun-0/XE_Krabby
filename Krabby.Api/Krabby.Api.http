@@ -1,7 +1,7 @@
 @Krabby.Api_HostAddress = http://localhost:5206
 
 ###  Anime lookup
-GET {{Krabby.Api_HostAddress}}/api/anidb/aid/8321
+GET {{Krabby.Api_HostAddress}}/api/anidb/aid/18437
 Accept: application/json
 
 ###
