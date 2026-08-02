@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Linq;
 using Krabby.Core.Models;
 
+/// NOT USED ///
 namespace Krabby.Core.Interfaces
 {
     internal interface IAnimeData

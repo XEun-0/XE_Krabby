@@ -123,11 +123,34 @@ public class AniDbSession
         
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public LoginState GetSessionState()
+    {
+        if (string.IsNullOrWhiteSpace(_sessionKey))
+        {
+            return LoginState.LoggedOut;
+        }
+
+        if (HasKeyExpired())
+        {
+            return LoginState.Expired;
+        }
+
+        return LoginState.LoggedIn;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public bool HasKeyExpired()
     {
         // Check expiration criteria
-        //TimeOnly updatedCurrTimeUTC = TimeOnly.FromDateTime(DateTime.Now);
-        //TimeOnly existingCurrTimeUTC = TimeOnly.FromDateTime(LastLoggedInTime);
+        // TimeOnly updatedCurrTimeUTC = TimeOnly.FromDateTime(DateTime.Now);
+        // TimeOnly existingCurrTimeUTC = TimeOnly.FromDateTime(LastLoggedInTime);
         var updatedCurrTimeUTC = DateTime.UtcNow;
         var existingCurrTimeUTC = LastLoggedInTime.ToUniversalTime();
 

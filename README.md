@@ -202,3 +202,77 @@ krabby=#
   }
 }
 ```
+
+```
+{
+  "status": "done",
+  "data": {
+    "animeName": "Digimon Xros Wars: Toki o Kakeru Shounen Hunter-tachi",
+    "airDateYear": "2011",
+    "session_key": "gqnE7",
+    "aid": 8616,
+    "episodeData": [
+      {
+        "eid": 133293,
+        "episodeNumber": "01",
+        "type": "Regular"
+      },
+      {
+        "eid": 133294,
+        "episodeNumber": "02",
+        "type": "Regular"
+      },
+      {
+        "eid": 133893,
+        "episodeNumber": "03",
+        "type": "Regular"
+      },
+      {
+        "eid": 133892,
+        "episodeNumber": "04",
+        "type": "Regular"
+      },
+      {
+        "eid": 133891,
+        "episodeNumber": "05",
+        "type": "Regular"
+      },
+      {
+        "eid": 133890,
+        "episodeNumber": "06",
+        "type": "Regular"
+      },
+      {
+        "eid": 134843,
+        "episodeNumber": "07",
+        "type": "Regular"
+      },
+      {
+        "eid": 134907,
+        "episodeNumber": "08",
+        "type": "Regular"
+      },
+      {
+        "eid": 135002,
+        "episodeNumber": "09",
+        "type": "Regular"
+      },
+      {
+        "eid": 135039,
+        "episodeNumber": "10",
+        "type": "Regular"
+      },
+      {
+        "eid": 135215,
+        "episodeNumber": "11",
+        "type": "Regular"
+      },
+      {
+        "eid": 135255,
+        "episodeNumber": "12",
+        "type": "Regular"
+      }
+    ]
+  }
+}
+```
