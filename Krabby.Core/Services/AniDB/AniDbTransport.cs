@@ -10,8 +10,14 @@ namespace Krabby.Core.Services.AniDB;
 /// </summary>
 public class AniDbTransport
 {
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly UdpClient _udp;
 
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly AniDbRateLimiter _rateLimiter;
 
     /// <summary>
@@ -57,10 +63,11 @@ public class AniDbTransport
 
         var completed = await Task.WhenAny(receiveTask, timeoutTask);
 
-        if (completed == timeoutTask)
+        if (completed == timeoutTask) 
+        {
             return AppCommon.TIMEOUT_ERROR;
-
-
+        }
+        
         var response = receiveTask.Result;
 
         var text = Encoding.UTF8.GetString(response.Buffer);

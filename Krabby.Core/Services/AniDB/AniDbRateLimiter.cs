@@ -9,9 +9,15 @@ namespace Krabby.Core.Services.AniDB;
 /// </summary>
 public class AniDbRateLimiter
 {
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly SemaphoreSlim _lock = new(1, 1);
 
-    private DateTime _lastCall = DateTime.MinValue;
+    /// <summary>
+    /// 
+    /// </summary>
+    private DateTime _lastCallUTC = DateTime.MinValue;
 
     /// <summary>
     /// 
@@ -27,22 +33,24 @@ public class AniDbRateLimiter
         await _lock.WaitAsync();
 
         try
-        {
-            var now = DateTime.UtcNow;
-            var elapsed = now - _lastCall;
+        {   
+            // Grab current time in UTC
+            var nowUTC = DateTime.UtcNow;
+            // Calculate delta from last timestamp in UTC
+            var elapsedUTC = nowUTC - _lastCallUTC;
 
-            if (elapsed < _minDelay)
+            if (elapsedUTC < _minDelay)
             {
-                var delay = _minDelay - elapsed;
+                var delay = _minDelay - elapsedUTC;
 
                 Console.WriteLine($"[RateLimiter] Waiting {delay.TotalMilliseconds} ms");
 
                 await Task.Delay(delay);
             }
 
-            _lastCall = DateTime.UtcNow;
+            _lastCallUTC = DateTime.UtcNow;
 
-            Console.WriteLine($"[RateLimiter] Proceed at {_lastCall:HH:mm:ss.fff}");
+            Console.WriteLine($"[RateLimiter] Proceed at {_lastCallUTC:HH:mm:ss.fff}");
         }
         finally
         {
