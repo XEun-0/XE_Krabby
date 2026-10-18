@@ -103,6 +103,10 @@ public class AniDbSession
         Console.WriteLine("[AniDbSession: LoadAsync] Current status is: " + StatusToString(SessionStatus));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task<string?> GetSessionAsync()
     {
         if (!string.IsNullOrWhiteSpace(_sessionKey))
@@ -166,6 +170,11 @@ public class AniDbSession
 
         return false;
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task SaveAsync()
     {
         var cache = new SessionCache
@@ -184,6 +193,11 @@ public class AniDbSession
         Console.WriteLine("[AniDbSession: SaveAsync] Saved session");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="session"></param>
+    /// <returns></returns>
     public async Task SetSession(string session)
     {
         _sessionKey = session;
@@ -192,6 +206,9 @@ public class AniDbSession
         await SaveAsync();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public DateTime LastLoggedInTime
     {
         get 
@@ -201,11 +218,20 @@ public class AniDbSession
         set { _lastLoggedIn = value; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public bool HasSession()
     {
         return !string.IsNullOrWhiteSpace(_sessionKey);
     }
 
+    /// <summary>
+    ///     Takes SessionCacheStatus and turns into string
+    /// </summary>
+    /// <param name="statusIn"></param>
+    /// <returns></returns>
     private string StatusToString(SessionCacheStatus statusIn)
     {
         return statusIn switch

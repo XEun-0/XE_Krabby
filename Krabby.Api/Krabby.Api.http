@@ -30,15 +30,15 @@ Accept: application/json
 
 ###
 
-# ### AniDB login status test
-# GET {{Krabby.Api_HostAddress}}/api/anidb/login/status
-# Accept: application/json
+### AniDB login status test
+GET {{Krabby.Api_HostAddress}}/api/anidb/login/status
+Accept: application/json
 
 # ###
 
-# ### AniDB login test
-# GET {{Krabby.Api_HostAddress}}/api/anidb/login/execute
-# Accept: application/json
+### AniDB login test
+GET {{Krabby.Api_HostAddress}}/api/anidb/login/execute
+Accept: application/json
 
 # ###
 

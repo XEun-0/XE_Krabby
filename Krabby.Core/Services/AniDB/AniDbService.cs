@@ -249,7 +249,7 @@ public sealed class AniDbService
 
             _state.Episodes.Clear();
 
-            Console.WriteLine($" _state.EpisodeMax = { _state.EpisodeMax}");
+            Console.WriteLine($"    [INFO] EpisodeMax = { _state.EpisodeMax}");
 
             for (int ep = 1; ep <= _state.EpisodeMax; ep++)
             {

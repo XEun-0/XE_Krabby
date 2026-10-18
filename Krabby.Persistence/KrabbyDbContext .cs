@@ -11,7 +11,11 @@ public class KrabbyDbContext : DbContext
 
     public DbSet<Models.AnimeData> Anime => base.Set<Models.AnimeData>();
     public DbSet<EpisodeData> Episodes => Set<EpisodeData>();
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Models.AnimeData>()
